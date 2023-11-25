@@ -10,11 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
-    [SerializeField]
-    private int totalJump;
-    private int airCount;
-    public bool isGrounded;
-
 
     // Start is called before the first frame update
     private void Start()
@@ -25,12 +20,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-    {
-        Move();
-        Jump();
-    }
-
-    private void Move()
     {
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
@@ -43,30 +32,10 @@ public class PlayerMovement : MonoBehaviour
         {
             sprite.flipX = true;
         }
-    }
-    private void Jump()
-    {
-        if (Input.GetButtonDown("Jump") && airCount < totalJump)
+
+        if (Input.GetButtonDown("Jump"))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            airCount++;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Ground")
-        {
-            airCount = 0;
-            isGrounded = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Ground")
-        {
-            isGrounded = false;
-        }
-    }
-
 }
