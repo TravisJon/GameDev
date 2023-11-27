@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
+    private Animator animator;
 
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,15 @@ public class PlayerMovement : MonoBehaviour
     {
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+
+        if (dirX != 0)
+        {
+            SetAnimParam(true);
+        }
+        if (dirX == 0)
+        {
+            SetAnimParam(false);
+        }
 
         if (dirX < 0f)
         {
@@ -78,5 +89,10 @@ public class PlayerMovement : MonoBehaviour
         { 
             moveSpeed = 7f; 
         }
+    }
+
+    private void SetAnimParam(bool isRunning)
+    {
+        animator.SetBool("isRunning", isRunning);
     }
 }
