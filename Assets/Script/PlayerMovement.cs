@@ -6,7 +6,15 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
+<<<<<<< Updated upstream
     private Animator animator;
+=======
+<<<<<<< HEAD
+    private Animator anim;
+=======
+    private Animator animator;
+>>>>>>> fa4c16f8b79732118638d82a80801287b2ee9e05
+>>>>>>> Stashed changes
 
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
@@ -21,7 +29,15 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+<<<<<<< Updated upstream
         animator = GetComponent<Animator>();
+=======
+<<<<<<< HEAD
+        anim = GetComponent<Animator>();
+=======
+        animator = GetComponent<Animator>();
+>>>>>>> fa4c16f8b79732118638d82a80801287b2ee9e05
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -35,6 +51,17 @@ public class PlayerMovement : MonoBehaviour
     {
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+<<<<<<< HEAD
+=======
+
+        if (dirX != 0)
+        {
+            SetAnimParam(true);
+        }
+        if (dirX == 0)
+        {
+            SetAnimParam(false);
+        }
 
         if (dirX != 0)
         {
@@ -53,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         {
             sprite.flipX = true;
         }
+>>>>>>> fa4c16f8b79732118638d82a80801287b2ee9e05
     }
     private void Jump()
     {
@@ -89,6 +117,31 @@ public class PlayerMovement : MonoBehaviour
         { 
             moveSpeed = 7f; 
         }
+
+        UpdateAnimationState();
+    }
+
+    private void UpdateAnimationState()
+    {
+        if (dirX > 0f)
+        {
+            anim.SetBool("running", true);
+            sprite.flipX = false;
+        }
+        else if (dirX < 0f)
+        {
+            anim.SetBool("running", true);
+            sprite.flipX = true;
+        }
+        else
+        {
+            anim.SetBool("running", false);
+        }
+    }
+
+    private void SetAnimParam(bool isRunning)
+    {
+        animator.SetBool("isRunning", isRunning);
     }
 
     private void SetAnimParam(bool isRunning)
