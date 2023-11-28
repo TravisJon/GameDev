@@ -5,9 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Left
-  - Right
-  - Boundary
   layers:
   - Default
   - TransparentFX
@@ -45,12 +42,9 @@ TagManager:
   - name: Background
     uniqueID: 2423315645
     locked: 0
-  - name: Material
-    uniqueID: 2259074265
-    locked: 0
-  - name: Object
-    uniqueID: 144900625
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Terrain
+    uniqueID: 144900625
     locked: 0
